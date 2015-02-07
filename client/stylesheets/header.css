@@ -1,0 +1,53 @@
+#header {
+  background-repeat: no-repeat;
+  height: 50px;
+  text-align: right;;
+  color: #999999;
+  font-weight: bold;
+  font-size: 16px;
+  padding-right: 1em;
+}
+
+.encabezado {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+}
+
+.headerTinymanPhoto {
+  border: 1px solid #294a9f;
+  border-top: 1px solid #123682;
+  -webkit-border-radius: 18px;
+  height: 36px;
+  margin: 5px 5px 3px 5px;
+  width: 36px;
+}
+
+.navbar-toggle {
+  padding: 1px;
+  margin-top: 1px;
+  margin-bottom: 0px;
+}
+.navbar-text {
+  line-height: 20px;
+}
+
+.navbar .nav > li > a {
+  padding-top: 15px;
+}
+
+.navbar .btn, .navbar .btn-group {
+  margin-top: 8px;
+}
+
+@media (max-width: 767px){
+  .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-right: 0px;
+    margin-left: 0px;
+  }  
+}

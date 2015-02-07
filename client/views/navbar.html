@@ -1,0 +1,70 @@
+<template name="navbar">
+  {{#if currentUser }}
+    {{> navbarLogged}}
+  {{else}}
+    {{> navbarAnonymous}}
+  {{/if}}
+</template>
+
+<template name="navbarAnonymous">
+  <header class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle btn" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{pathFor route='home'}}">rTable</a>
+      </div>      
+      <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
+        <ul class="nav navbar-nav">
+            <li><a href="{{pathFor route='listaMapas'}}">Listar Mapas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</template>
+
+<template name="navbarLogged">
+  <header class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle btn" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <img src="{{pic}}" class="headerTinymanPhoto">
+        </button>
+        <a class="navbar-brand" href="{{pathFor route='home'}}">rTable</a>
+      </div>      
+      <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
+        <img src="{{pic}}" class="headerTinymanPhoto pull-right hidden-xs">
+        <ul class="nav navbar-nav">
+          {{#if currentUser }}
+            {{#if isInRole 'admin'}}
+              <li>
+                <a id="rolesLnk" href="{{pathFor route='roles'}}">Roles</a>
+              </li>
+            {{/if}}          
+            {{#if isInRole 'master,jugador'}}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mapa <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  {{#if isInRole 'master'}}
+                    <li><a href="{{pathFor route='nuevoMapa'}}">Nuevo</a></li>
+                    <li><a href="#">Terrenos</a></li>
+                    <li class="divider"></li>
+                  {{/if}}
+                  <li><a href="{{pathFor route='listaMapas'}}">Listar Mapas</a></li>
+                </ul>
+              </li>              
+            {{/if}}     
+
+          {{/if}}          
+
+          <li class="last">
+          <button id="exitLnk" type="button" class="btn btn-default navbar-btn">Salir</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</template>

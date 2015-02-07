@@ -1,0 +1,12 @@
+#canvas { position: relative; }
+#canvas div { 
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  background: #fff;
+  color: #9e9da4;
+  text-align: center;
+}
+
+#canvas div.default{ background-color: #f4f4f4;}
+#canvas div.pasto{ background-color: #4dbd33;}

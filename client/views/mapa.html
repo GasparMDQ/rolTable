@@ -1,0 +1,91 @@
+<template name="mapaNew">
+  <h2>Nuevo Mapa</h2>
+  <form class="newMapForm">
+    <div class="form-group">
+      <label for="descripcionMapa">Descripcion</label>
+      <input type="text" class="form-control" id="descripcionMapa" placeholder="Descripcion" aria-describedby="helpDescripcion">
+      <span id="helpDescripcion" class="help-block">La descripcion ayuda al momento de seleccionar un mapa de la lista</span>
+    </div>
+    <div class="form-group">
+      <label for="anchoMapa">Ancho</label>
+      <input type="number" class="form-control" id="anchoMapa" placeholder="Ancho" aria-describedby="helpAncho" min="1" value="1">
+      <span id="helpAncho" class="help-block">El ancho de su mapa sera de {{piesAncho}}</span>
+    </div>
+    <div class="form-group">
+      <label for="altoMapa">Alto</label>
+      <input type="number" class="form-control" id="altoMapa" placeholder="Alto" aria-describedby="helpAlto" min="1" value="1">
+      <span id="helpAlto" class="help-block">El ancho de su mapa sera de {{piesAlto}}</span>
+    </div>
+    <div class="form-group">
+      <label for="terrenoMapa">Terreno base</label>
+      <input type="text" class="form-control" id="terrenoMapa" placeholder="Clase del terreno">
+    </div>
+    <button type="submit" class="btn btn-default crear-nuevo-mapa">Crear</button>
+  </form>
+</template>
+
+<template name="mapaList">
+  <h2>Mapas</h2>
+    <table class="table">
+
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Descripcion</th>
+        <th>Ancho</th>
+        <th>Alto</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="5"></td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      {{#each listaMapas}}
+        <tr data-id="{{_id}}">
+          <td>
+            {{_id}}
+          </td>
+          <td>
+            {{info.descripcion}}
+          </td>
+          <td>
+            {{info.ancho}}
+          </td>
+          <td>
+            {{info.alto}}
+          </td>
+          <td>
+              <div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+                <button type="button" class="btn btn-default ver-mapa"><i class="fa fa-eye"></i></button>
+                {{#if currentUser }}
+                  {{#if isInRole 'jugador,master'}}
+                    <button type="button" class="btn btn-default jugar-mapa"><i class="fa fa-gamepad"></i></button>
+                  {{/if}}
+                  {{#if isInRole 'master'}}
+                    <button type="button" class="btn btn-default edit-mapa"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-default del-mapa"><i class="fa fa-remove"></i></button>
+                  {{/if}}
+                {{/if}}
+              </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="mapaEdit">
+  {{this.info.descripcion}}
+  <div id="canvas" style="{{altura}}">
+  {{#each this.grid.rows}}
+    {{#each columns}}
+      <div class="{{terreno}}" style="{{position}}"></div>
+    {{/each}}
+  {{/each}}
+  </div>
+</template>

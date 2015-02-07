@@ -1,0 +1,57 @@
+<template name="roles">
+  <h2>Usuarios</h2>
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Roles</th>
+      </tr>
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="3"></td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      {{#each listaUsuarios}}
+        <tr data-id="{{_id}}">
+          <td>
+            {{profile.name}}
+          </td>
+          <td>
+            {{services.google.email}}
+          </td>
+          <td>
+              <div class="btn-group btn-group-sm" role="group" aria-label="roles">
+                {{#each roles}}
+                  <button type="button" class="btn btn-default user-role" data-value="{{this}}">{{this}}</button>
+                {{/each}}
+                <button type="button" class="btn btn-default add-role"><i class="fa fa-plus"></i></button>
+              </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <div>
+    Roles validos:
+    <div class="list-group">
+      <div class="list-group-item">
+        <h4>admin</h4>
+        <p>Puede asignar y eliminar roles a los usuarios</p>
+      </div>
+      <div class="list-group-item">
+        <h4>master</h4>
+        <p>Puede participar y crear cualquier mapa. Maneja todas las unidades</p>
+      </div>
+      <div class="list-group-item">
+        <h4>jugador</h4>
+        <p>Puede participar en cualquier mapa. Solo maneja las unidades que el mismo crea</p>
+      </div>
+    </div>
+  </div>
+</template>

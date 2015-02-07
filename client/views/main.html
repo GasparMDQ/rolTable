@@ -1,0 +1,22 @@
+<head>
+  <title>rol Table</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="icon" sizes="16x16 32x32" href="/favicon.png?v=1">
+  <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+</head>
+
+<template name="layout">
+  <div id="wrap">
+    <div id="nav">
+      {{> navbar}}
+    </div>
+    <div class="container">
+      <div id="contenido">
+        {{> yield}}
+      </div>
+    </div>
+    <div id="push"></div>
+  </div>
+  {{> footer}}
+</template>
