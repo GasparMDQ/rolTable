@@ -80,12 +80,32 @@
 </template>
 
 <template name="mapaEdit">
+  {{> mapTools}}
   {{this.info.descripcion}}
-  <div id="canvas" style="{{altura}}">
-  {{#each this.grid.rows}}
-    {{#each columns}}
-      <div class="{{terreno}}" style="{{position}}"></div>
-    {{/each}}
+  <div id="canvas" style="{{altura}}" data-id="{{_id}}">
+  {{#each this.grid.cells}}
+    <div class="{{terreno}} celda" style="{{position}}" data-row="{{index.r}}" data-column="{{index.c}}"></div>
   {{/each}}
+  </div>
+</template>
+
+<template name="mapTools">
+  <div class="well">
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="cellTerrain">Terreno</label>
+        <input type="text" class="form-control" id="cellTerrain" placeholder="Terreno" value="default">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="cellMovimiento">Movimiento</label>
+        <input type="number" class="form-control" id="cellMovimiento" placeholder="Movimiento" min="0" value="1">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="cellBlock"> Bloqueo
+        </label>
+      </div>
+
+    </form>
   </div>
 </template>

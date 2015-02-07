@@ -84,7 +84,7 @@ if (Meteor.isClient) {
   Template.mapaEdit.helpers({
     altura: function (){
       if(this.grid){
-        var pos = "height:"+this.grid.rows.length *50+"px;";
+        var pos = "height:"+this.info.alto *50+"px;";
         return pos;
       }
     },
@@ -94,24 +94,45 @@ if (Meteor.isClient) {
     },
   });
 
+  Template.mapaEdit.events({
+    'click .celda': function(event){
+      var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
+      var mapa = Mapas.findOne({_id:mapId});
+      for(var i =0;i<mapa.grid.cells.length;i++){
+        var celda = mapa.grid.cells[i];
+        if(celda.index.r == this.index.r && celda.index.c == this.index.c) {
+          celda.terreno = $('#cellTerrain').val();
+          celda.bloqueo = $('#cellBlock').is(':checked');
+          celda.movimiento = $('#cellMovimiento').val();
+          break;
+        }
+      }
+      //Update Mapa
+      Meteor.call('updateMapa', mapa, function(error, result){
+        if (error) {
+          alert(error.message);
+        }          
+      });
+    }
+  });
+
   Meteor.methods({
     createMapa: function(data){
       var mapa = {};
       mapa.info = data;
-      mapa.grid = {rows : []};
+      mapa.grid = {cells : []};
       for(var i = 0;i<data.alto;i++){
-        mapa.grid.rows[i] = {columns : []};
         for(var j = 0;j<data.ancho;j++){
-          mapa.grid.rows[i].columns[j] = {
-            //Sacar esta info de la DB, coleccion terrenos
+          mapa.grid.cells.push({
             index: {r:i, c:j},
+            //Sacar esta info de la DB, coleccion terrenos
             terreno: data.terrenoDefault,
             bloqueo: false, //db Data
-            movimiento: 1, //db Data
-            visibilidad: 1,
+            movimiento: "1", //db Data
+            visibilidad: "1",
             criaturas: [],
             artefactos: []
-          };
+          });
         }
       }
       console.log(mapa);
@@ -119,6 +140,9 @@ if (Meteor.isClient) {
     removeMapa: function(mapId){
       Mapas.remove(mapId);
     },
+    updateMapa: function(data){
+      Mapas.update(data._id, data);
+    }
 
 
   });
