@@ -10,7 +10,7 @@ Deps.autorun(function(){
 Deps.autorun(function(){
   //Al pasar el usuario y no el ID, se resuscribe cada vez que se modifica el mismo
   //Posible problema de performance!!
-  Meteor.subscribe('mapas', Meteor.user());
+  Meteor.subscribe('mapas', Meteor.user(), Session.get('map'));
 });
 
 /*

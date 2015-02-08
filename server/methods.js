@@ -28,6 +28,9 @@
         var mapa = {};
         mapa.info = data;
         mapa.grilla = [];
+        if(data.alto<1 || data.alto>50 || data.ancho<1 || data.ancho>50) {
+          throw new Meteor.Error(403, "Wrong size");
+        }
         for(var i = 0;i<data.alto;i++){
           for(var j = 0;j<data.ancho;j++){
             mapa.grilla.push({

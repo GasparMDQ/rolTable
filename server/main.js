@@ -25,10 +25,21 @@ Meteor.publish('allUsersData', function(userId){
 
 });
 
-Meteor.publish('mapas', function(userId){
+Meteor.publish('mapas', function(userId, mapId){
   if (Roles.userIsInRole(userId, ['jugador', 'master'])){
-    //Todos
-    return Mapas.find();
+    if(mapId){
+      return Mapas.find({'_id': mapId});
+    } else {
+      return Mapas.find({},{
+            fields: {
+              '_id': 1,
+              'info': 1
+            },
+            sort: {
+              'info.descripcion':1
+            }
+          });
+    }
   }
   this.stop();
   return;

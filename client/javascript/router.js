@@ -37,7 +37,7 @@ Router.route('/mapa/new', function () {
 
 Router.route('/mapa', function () {
     this.render('mapaList', {
-      //data: function () { return Items.findOne({_id: this.params._id}); }
+      data: function () { Session.set('map', false); }
     });
   }, {
     name: 'listaMapas'
