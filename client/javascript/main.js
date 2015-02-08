@@ -1,3 +1,6 @@
+Meteor.startup(function(){
+});
+
 Meteor.subscribe('userData');
 
 Deps.autorun(function(){
@@ -9,3 +12,9 @@ Deps.autorun(function(){
   //Posible problema de performance!!
   Meteor.subscribe('mapas', Meteor.user());
 });
+
+/*
+Deps.autorun(function(){
+  Meteor.subscribe('celdas', Session.get('map'), Meteor.user());
+});
+*/

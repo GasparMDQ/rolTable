@@ -43,14 +43,18 @@ if (Meteor.isClient) {
       //@todo limpiar el string para evitar simbolos raros y espacios
       data.terrenoDefault = data.terrenoDefault.toLowerCase();
 
+      Session.set('updating-cells', true);
       Meteor.call('createMapa',data,function(error, result){
         if (error) {
           alert(error.message);
+          //@todo desbloquear boton de crear
         } else {
           //Redirect to id
+          Session.set('updating-cells', false);
           Router.go('editMapa', {_id: result.id});
         }
       });
+      //@todo bloquear boton de crear  
 
     },
   });
@@ -81,9 +85,10 @@ if (Meteor.isClient) {
 
   });
 
+
   Template.mapaEdit.helpers({
     altura: function (){
-      if(this.grid){
+      if(this.info){
         var pos = "height:"+this.info.alto *50+"px;";
         return pos;
       }
@@ -98,16 +103,20 @@ if (Meteor.isClient) {
     'click .celda': function(event){
       var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
       var mapa = Mapas.findOne({_id:mapId});
-      for(var i =0;i<mapa.grid.cells.length;i++){
-        var celda = mapa.grid.cells[i];
-        if(celda.index.r == this.index.r && celda.index.c == this.index.c) {
-          celda.terreno = $('#cellTerrain').val();
-          celda.bloqueo = $('#cellBlock').is(':checked');
-          celda.movimiento = $('#cellMovimiento').val();
+
+      var cellRow = $(event.currentTarget).attr('data-row');
+      var cellCol = $(event.currentTarget).attr('data-column');
+
+      for(var i=0;i<mapa.grilla.length;i++){
+        if(mapa.grilla[i].index.r == cellRow && mapa.grilla[i].index.c == cellCol){
+            mapa.grilla[i].terreno = $('#cellTerrain').val().toLowerCase();
+            mapa.grilla[i].bloqueo = $('#cellBlock').is(':checked');
+            mapa.grilla[i].movimiento = $('#cellMovimiento').val();
           break;
         }
       }
-      //Update Mapa
+
+      //Update Celda
       Meteor.call('updateMapa', mapa, function(error, result){
         if (error) {
           alert(error.message);
@@ -117,33 +126,12 @@ if (Meteor.isClient) {
   });
 
   Meteor.methods({
-    createMapa: function(data){
-      var mapa = {};
-      mapa.info = data;
-      mapa.grid = {cells : []};
-      for(var i = 0;i<data.alto;i++){
-        for(var j = 0;j<data.ancho;j++){
-          mapa.grid.cells.push({
-            index: {r:i, c:j},
-            //Sacar esta info de la DB, coleccion terrenos
-            terreno: data.terrenoDefault,
-            bloqueo: false, //db Data
-            movimiento: "1", //db Data
-            visibilidad: "1",
-            criaturas: [],
-            artefactos: []
-          });
-        }
-      }
-      console.log(mapa);
-    },
     removeMapa: function(mapId){
       Mapas.remove(mapId);
     },
     updateMapa: function(data){
       Mapas.update(data._id, data);
-    }
-
+    },
 
   });
 

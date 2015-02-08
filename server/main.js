@@ -34,3 +34,11 @@ Meteor.publish('mapas', function(userId){
   return;
 });
 
+Meteor.publish('celdas', function(mapId, userId){
+  if (Roles.userIsInRole(userId, ['jugador', 'master'])){
+    return Celdas.find({'mapaId': mapId});
+  }
+  this.stop();
+  return;
+});
+

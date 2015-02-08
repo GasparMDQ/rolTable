@@ -22,26 +22,24 @@
     },
 
     createMapa: function(data){
-      var mapa = {};
-      mapa.info = data;
-      mapa.grid = {cells : []};
-      for(var i = 0;i<data.alto;i++){
-        for(var j = 0;j<data.ancho;j++){
-          mapa.grid.cells.push({
-            index: {r:i, c:j},
-            //Sacar esta info de la DB, coleccion terrenos
-            terreno: data.terrenoDefault,
-            bloqueo: false, //db Data
-            movimiento: "1", //db Data
-            visibilidad: "1",
-            criaturas: [],
-            artefactos: []
-          });
-        }
-      }
       var loggedInUser = Meteor.user();
 
       if (Roles.userIsInRole(loggedInUser, ['master'])) {
+        var mapa = {};
+        mapa.info = data;
+        mapa.grilla = [];
+        for(var i = 0;i<data.alto;i++){
+          for(var j = 0;j<data.ancho;j++){
+            mapa.grilla.push({
+              index: {r:i, c:j},
+              //Sacar esta info de la DB, coleccion terrenos
+              terreno: data.terrenoDefault,
+              bloqueo: false, //db Data
+              movimiento: "1", //db Data
+              visibilidad: "1"
+            });
+          }
+        }
         var newId = Mapas.insert(mapa);
         return {id: newId};
       } else {
@@ -54,6 +52,7 @@
       var loggedInUser = Meteor.user();
 
       if (Roles.userIsInRole(loggedInUser, ['master'])) {
+        //Celdas.remove({'mapaId':mapId});
         Mapas.remove(mapId);
       } else {
         throw new Meteor.Error(403, "Not authorized to remove maps");      
@@ -69,6 +68,5 @@
         throw new Meteor.Error(403, "Not authorized to modify maps");      
       }
     },
-
 
   });

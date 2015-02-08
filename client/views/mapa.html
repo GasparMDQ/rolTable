@@ -83,8 +83,12 @@
   {{> mapTools}}
   {{this.info.descripcion}}
   <div id="canvas" style="{{altura}}" data-id="{{_id}}">
-  {{#each this.grid.cells}}
-    <div class="{{terreno}} celda" style="{{position}}" data-row="{{index.r}}" data-column="{{index.c}}"></div>
+  {{#each this.grilla}}
+    <div class="{{terreno}} celda" style="{{position}}" data-row="{{index.r}}" data-column="{{index.c}}" data-id="{{_id}}">
+      {{#if bloqueo}}
+        <i class="fa fa-ban fa-3x"></i>
+      {{/if}}
+    </div>
   {{/each}}
   </div>
 </template>

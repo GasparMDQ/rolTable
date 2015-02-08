@@ -4,13 +4,34 @@
   height: 48px;
   width: 48px;
   background-color: #f4f4f4;
-  color: #9e9da4;
+  color: #e3170d;
   text-align: center;
+
+  /* Estilo para evitar iconos borrosos */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;  
 }
+
+/* Iconos */
+#canvas div.celda > i {
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+#canvas div.celda > .fa-ban { color: #000;}
+#canvas div.celda.vacio > .fa-ban { color: #ffffff;}
 
 /*Terrenos*/
 #canvas div.celda.default{ background-color: #f4f4f4;}
+
 #canvas div.celda.pasto{ background-color: #4dbd33;}
+#canvas div.celda.tierra{ background-color: #8b4513;}
+#canvas div.celda.lago{ background-color: #50a6c2;}
+#canvas div.celda.mar{ background-color: #23238e;}
+#canvas div.celda.piedra{ background-color: #4f4f4f;}
+#canvas div.celda.nieve{ background-color: #8b8989;}
+#canvas div.celda.vacio{ background-color: #1a1a1a;}
 
 
 /*Criaturas*/
