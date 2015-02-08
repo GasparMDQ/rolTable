@@ -1,4 +1,16 @@
-#canvas { position: relative; }
+#canvas {
+  position: relative;
+  transition: .3s;  
+}
+
+div.canvas-wrapper {
+  perspective: 1000px;
+}
+
+div.tresD {
+  transform: rotatex(50deg) translatey(-30em) translatex(2.5em);
+}
+
 #canvas div { 
   position: absolute;
   height: 48px;

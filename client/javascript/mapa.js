@@ -100,6 +100,10 @@ if (Meteor.isClient) {
   });
 
   Template.mapaEdit.events({
+    'click .tresD-btn': function(event){
+      $('#canvas').toggleClass('tresD');
+    },
+    
     'click .celda': function(event){
       var mapId = $(event.currentTarget).closest('div#canvas').attr('data-id');
       var mapa = Mapas.findOne({_id:mapId});
