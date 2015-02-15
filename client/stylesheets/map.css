@@ -1,6 +1,7 @@
 #canvas {
   position: relative;
-  transition: .3s;  
+  transition: .3s;
+  transform-style: preserve-3d;
 }
 
 div.canvas-wrapper {

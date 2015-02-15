@@ -1,0 +1,54 @@
+div.criatura {
+  transform-origin: 50% 50%;
+}
+
+div.criatura.non-selectable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+div.criatura.orientation-n { transform: rotateZ(0deg); }
+div.criatura.orientation-e { transform: rotateZ(90deg); }
+div.criatura.orientation-s { transform: rotateZ(180deg); }
+div.criatura.orientation-w { transform: rotateZ(270deg); }
+
+div.criatura.orientation-ne { transform: rotateZ(45deg); }
+div.criatura.orientation-se { transform: rotateZ(135deg); }
+div.criatura.orientation-sw { transform: rotateZ(225deg); }
+div.criatura.orientation-nw { transform: rotateZ(315deg); }
+
+div.criatura > .flat {
+  background-color: transparent!important;
+  border-radius: 25px;
+}
+
+.tresD > div.criatura > .flat { background: radial-gradient(black, #dddddd); }
+:not(.tresD) > div.criatura > .stand-up { display:none; }
+
+div.criatura > .stand-up {
+  transform-origin: 50% 100%;
+  transform: rotateX(-90deg)!important;
+  top: -75px!important;
+  height: 100px!important;
+  border-top-left-radius:12px;
+  border-top-right-radius:12px;
+}
+
+:not(.tresD) > div.criatura > .char.flat { background-image: url("img/char-flat.png"); }
+div.criatura > .char.stand-up { background-image: url("img/char-stand-up.png"); }
+
+/*
+Render de Criaturas
+Datos necesarios:
+-Orientacion
+-char name (clase p/sprites)
+-Ubicacion en el mapa
+
+<div class="criatura orientation-sw" style="top:350px; left:250px;">
+  <div class="char flat"></div>
+  <div class="char stand-up"></div>
+</div>
+
+Usar para el momento de mover piezas, para que se pueda clickear el tablero y no las piezas
+http://stackoverflow.com/questions/6300635/how-to-make-an-element-transparent-to-clicks-but-still-visible
+*/
