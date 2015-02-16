@@ -1,23 +1,53 @@
-div.criatura {
+/*Criaturas*/
+#canvas div.criatura{
+  background-color: transparent;
   transform-origin: 50% 50%;
+  border: 0px solid black;
 }
 
-div.criatura.non-selectable {
+#canvas div.criatura.size-normal{ height: 48px; width: 48px;}
+#canvas div.criatura.size-large{ height: 98px; width: 98px;}
+#canvas div.criatura.size-huge{ height: 148px; width: 145px;}
+#canvas div.criatura.size-gargantuan{ height: 198px; width: 195px;}
+#canvas div.criatura.size-colossal{ height: 298px; width: 298px;}
+
+#canvas div.criatura > img { margin: 5px;}
+#canvas div.criatura.size-normal > img { height: 40px; width: 40px; -webkit-border-radius: 20px;}
+#canvas div.criatura.size-large > img { height: 90px; width: 90px; -webkit-border-radius: 45px;}
+#canvas div.criatura.size-huge > img { height: 140px; width: 140px; -webkit-border-radius: 70px;}
+#canvas div.criatura.size-gargantuan > img { height: 190px; width: 190px; -webkit-border-radius: 95px;}
+#canvas div.criatura.size-colossal > img { height: 290px; width: 290px; -webkit-border-radius: 145px;}
+
+/*
+Ranger  rojo
+Warrior  purpura
+Rogue  naranja
+Clerigo amarillo
+Mago Azul
+Druida Verde
+Paladin blanco
+
+npc marron
+*/
+
+#canvas div.criatura > .flat { border: 2px solid red; }
+
+#canvas div.criatura.non-selectable {
   opacity: 0.5;
   pointer-events: none;
 }
 
-div.criatura.orientation-n { transform: rotateZ(0deg); }
-div.criatura.orientation-e { transform: rotateZ(90deg); }
-div.criatura.orientation-s { transform: rotateZ(180deg); }
-div.criatura.orientation-w { transform: rotateZ(270deg); }
+#canvas div.criatura.orientation-n { transform: rotateZ(0deg); }
+#canvas div.criatura.orientation-e { transform: rotateZ(90deg); }
+#canvas div.criatura.orientation-s { transform: rotateZ(180deg); }
+#canvas div.criatura.orientation-w { transform: rotateZ(270deg); }
 
-div.criatura.orientation-ne { transform: rotateZ(45deg); }
-div.criatura.orientation-se { transform: rotateZ(135deg); }
-div.criatura.orientation-sw { transform: rotateZ(225deg); }
-div.criatura.orientation-nw { transform: rotateZ(315deg); }
+#canvas div.criatura.orientation-ne { transform: rotateZ(45deg); }
+#canvas div.criatura.orientation-se { transform: rotateZ(135deg); }
+#canvas div.criatura.orientation-sw { transform: rotateZ(225deg); }
+#canvas div.criatura.orientation-nw { transform: rotateZ(315deg); }
 
-div.criatura > .flat {
+#canvas div.criatura > .flat {
   background-color: transparent!important;
   border-radius: 25px;
 }
@@ -34,8 +64,8 @@ div.criatura > .stand-up {
   border-top-right-radius:12px;
 }
 
-:not(.tresD) > div.criatura > .char.flat { background-image: url("img/char-flat.png"); }
-div.criatura > .char.stand-up { background-image: url("img/char-stand-up.png"); }
+:not(.tresD) > div.criatura.char > .flat { background-image: url("img/char-flat.png"); }
+div.criatura.char > .stand-up { background-image: url("img/char-stand-up.png"); }
 
 /*
 Render de Criaturas
@@ -44,9 +74,9 @@ Datos necesarios:
 -char name (clase p/sprites)
 -Ubicacion en el mapa
 
-<div class="criatura orientation-sw" style="top:350px; left:250px;">
-  <div class="char flat"></div>
-  <div class="char stand-up"></div>
+<div class="criatura orientation-sw char" style="top:350px; left:250px;">
+  <div class="flat"></div>
+  <div class="stand-up"></div>
 </div>
 
 Usar para el momento de mover piezas, para que se pueda clickear el tablero y no las piezas

@@ -89,13 +89,21 @@ if (Meteor.isClient) {
   Template.mapaEdit.helpers({
     altura: function (){
       if(this.info){
-        var pos = "height:"+this.info.alto *50+"px;";
-        return pos;
+        var altura = "height:"+this.info.alto *50+"px;";
+        return altura;
       }
     },
     position: function (){
       var pos = "top:"+this.index.r *50+"px; left:"+this.index.c *50+"px;";
       return pos;
+    },
+    backgroundSize: function (){
+      var size = "height:"+this.info.alto *50+"px; width:"+this.info.ancho *50+"px;";
+      return size;
+    },
+    desc: function (){
+      var description = this.info.descripcion.replace(/\s+/g, '-').toLowerCase();;
+      return description;
     },
   });
 

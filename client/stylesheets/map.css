@@ -14,16 +14,20 @@ div.tresD {
 
 #canvas div { 
   position: absolute;
-  height: 48px;
-  width: 48px;
-  background-color: #f4f4f4;
-  color: #e3170d;
-  text-align: center;
+  height: 50px;
+  width: 50px;
 
   /* Estilo para evitar iconos borrosos */
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;  
+}
+
+#canvas > div.celda {
+  background-color: #f4f4f4;
+  color: #e3170d;
+  text-align: center;
+  border: 1px dashed gray;
 }
 
 /* Iconos */
@@ -45,20 +49,13 @@ div.tresD {
 #canvas div.celda.piedra{ background-color: #4f4f4f;}
 #canvas div.celda.nieve{ background-color: #8b8989;}
 #canvas div.celda.vacio{ background-color: #1a1a1a;}
+#canvas div.celda.transparente{ background-color: transparent;}
 
+/*Mapas*/
+div.background-mapa { background-repeat: no-repeat; }
 
-/*Criaturas*/
-#canvas div.criatura{ background-color: transparent;}
-
-#canvas div.criatura.size-normal{ height: 48px; width: 48px;}
-#canvas div.criatura.size-large{ height: 98px; width: 98px;}
-#canvas div.criatura.size-huge{ height: 148px; width: 145px;}
-#canvas div.criatura.size-gargantuan{ height: 198px; width: 195px;}
-#canvas div.criatura.size-colossal{ height: 298px; width: 298px;}
-
-#canvas div.criatura > img { margin: 5px;}
-#canvas div.criatura.size-normal > img { height: 40px; width: 40px; -webkit-border-radius: 20px;}
-#canvas div.criatura.size-large > img { height: 90px; width: 90px; -webkit-border-radius: 45px;}
-#canvas div.criatura.size-huge > img { height: 140px; width: 140px; -webkit-border-radius: 70px;}
-#canvas div.criatura.size-gargantuan > img { height: 190px; width: 190px; -webkit-border-radius: 95px;}
-#canvas div.criatura.size-colossal > img { height: 290px; width: 290px; -webkit-border-radius: 145px;}
+div.background-mapa.habitacion-1 { background-image: url("img/habitacion-1-950x750.png"); }
+div.background-mapa.village-7 { background-image: url("img/village-07-500x400.jpg"); }
+div.background-mapa.swamp-1 { background-image: url("img/Swamp1_1500x1200.jpg"); }
+div.background-mapa.town-square { background-image: url("img/Town_Square_1500x1200.jpg"); }
+div.background-mapa.town-square-2 { background-image: url("img/Town_Square_2_1500x1200.jpg"); }
