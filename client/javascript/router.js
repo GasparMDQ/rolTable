@@ -54,3 +54,15 @@ Router.route('/mapa/edit/:_id', function () {
   }, {
     name: 'editMapa'
 });
+
+Router.route('/mapa/play/:_id', function () {
+    this.render('mapaPlay', {
+      data: function () {
+        Session.set('map', this.params._id);
+        Session.set('action', 'play');
+        return Mapas.findOne({_id: this.params._id});
+      }
+    });
+  }, {
+    name: 'playMapa'
+});

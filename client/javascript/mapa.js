@@ -81,6 +81,11 @@ if (Meteor.isClient) {
     'click .edit-mapa': function (event) {
       var mapId = $(event.currentTarget).closest('tr').attr('data-id');
       Router.go('editMapa', {_id: mapId});
+    },
+
+    'click .play-mapa': function (event) {
+      var mapId = $(event.currentTarget).closest('tr').attr('data-id');
+      Router.go('playMapa', {_id: mapId});
     }
 
   });
@@ -98,12 +103,16 @@ if (Meteor.isClient) {
       return pos;
     },
     backgroundSize: function (){
-      var size = "height:"+this.info.alto *50+"px; width:"+this.info.ancho *50+"px;";
-      return size;
+      if(this.info){
+        var size = "height:"+this.info.alto *50+"px; width:"+this.info.ancho *50+"px;";
+        return size;
+      }
     },
     desc: function (){
-      var description = this.info.descripcion.replace(/\s+/g, '-').toLowerCase();;
-      return description;
+      if(this.info){
+        var description = this.info.descripcion.replace(/\s+/g, '-').toLowerCase();;
+        return description;
+      }
     },
   });
 
@@ -143,6 +152,7 @@ if (Meteor.isClient) {
         case 'play':
           break;
         default:
+        //do nothing (por ahora)
           break;
       }
 

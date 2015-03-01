@@ -64,7 +64,7 @@
                 <button type="button" class="btn btn-default ver-mapa"><i class="fa fa-eye"></i></button>
                 {{#if currentUser }}
                   {{#if isInRole 'jugador,master'}}
-                    <button type="button" class="btn btn-default jugar-mapa"><i class="fa fa-gamepad"></i></button>
+                    <button type="button" class="btn btn-default play-mapa"><i class="fa fa-gamepad"></i></button>
                   {{/if}}
                   {{#if isInRole 'master'}}
                     <button type="button" class="btn btn-default edit-mapa"><i class="fa fa-edit"></i></button>
@@ -81,14 +81,25 @@
 
 
 <template name="mapaEdit">
-<div id="wrapper">
-  <div id="sidebar-wrapper">
-    {{> mapTools}}
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      {{> mapTools}}
+    </div>
+    <div id="content-wrapper">
+      {{> mapaLayout}}
+    </div>
   </div>
-  <div id="content-wrapper">
-    {{> mapaLayout}}
+</template>
+
+<template name="mapaPlay">
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      {{> charTools}}
+    </div>
+    <div id="content-wrapper">
+      {{> mapaLayout}}
+    </div>
   </div>
-</div>
 </template>
 
 <template name="mapaLayout">
@@ -114,26 +125,5 @@
         </div>
       {{/each}}
     </div>
-  </div>
-</template>
-
-<template name="mapTools">
-  <div class="well">
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="cellTerrain">Terreno</label>
-        <input type="text" class="form-control" id="cellTerrain" placeholder="Terreno" value="default">
-      </div>
-      <div class="form-group">
-        <label for="cellMovimiento">Movimiento</label>
-        <input type="number" class="form-control" id="cellMovimiento" placeholder="Movimiento" min="0" value="1">
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" id="cellBlock"> Bloqueo
-        </label>
-      </div>
-
-    </form>
   </div>
 </template>
