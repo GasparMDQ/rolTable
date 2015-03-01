@@ -47,6 +47,7 @@ Router.route('/mapa/edit/:_id', function () {
     this.render('mapaEdit', {
       data: function () {
         Session.set('map', this.params._id);
+        Session.set('action', 'edit');
         return Mapas.findOne({_id: this.params._id});
       }
     });

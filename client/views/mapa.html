@@ -79,13 +79,27 @@
   </table>
 </template>
 
+
 <template name="mapaEdit">
-  {{> mapTools}}
+<div id="wrapper">
+  <div id="sidebar-wrapper">
+    {{> mapTools}}
+  </div>
+  <div id="content-wrapper">
+    {{> mapaLayout}}
+  </div>
+</div>
+</template>
+
+<template name="mapaLayout">
   <div>
   <p>
     {{this.info.descripcion}}
-    <button type="button" class="btn btn-default btn-xs tresD-btn">
+    <button type="button" class="btn btn-default btn-xs tresd-toggle">
        <i class="fa fa-cube"></i>
+    </button>
+    <button type="button" class="btn btn-default btn-xs sidebar-toggle">
+       <i class="fa fa-bars"></i>
     </button>
    </p>
   </div>

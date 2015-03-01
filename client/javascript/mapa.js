@@ -86,7 +86,7 @@ if (Meteor.isClient) {
   });
 
 
-  Template.mapaEdit.helpers({
+  Template.mapaLayout.helpers({
     altura: function (){
       if(this.info){
         var altura = "height:"+this.info.alto *50+"px;";
@@ -107,9 +107,13 @@ if (Meteor.isClient) {
     },
   });
 
-  Template.mapaEdit.events({
-    'click .tresD-btn': function(event){
+  Template.mapaLayout.events({
+    'click .tresd-toggle': function(event){
       $('#canvas').toggleClass('tresD');
+    },
+    
+    'click .sidebar-toggle': function(event){
+      $('#wrapper').toggleClass('toggled');
     },
     
     'click .celda': function(event){
@@ -119,21 +123,30 @@ if (Meteor.isClient) {
       var cellRow = $(event.currentTarget).attr('data-row');
       var cellCol = $(event.currentTarget).attr('data-column');
 
-      for(var i=0;i<mapa.grilla.length;i++){
-        if(mapa.grilla[i].index.r == cellRow && mapa.grilla[i].index.c == cellCol){
-            mapa.grilla[i].terreno = $('#cellTerrain').val().toLowerCase();
-            mapa.grilla[i].bloqueo = $('#cellBlock').is(':checked');
-            mapa.grilla[i].movimiento = $('#cellMovimiento').val();
+      switch(Session.get('action')){
+        case 'edit':
+          for(var i=0;i<mapa.grilla.length;i++){
+            if(mapa.grilla[i].index.r == cellRow && mapa.grilla[i].index.c == cellCol){
+                mapa.grilla[i].terreno = $('#cellTerrain').val().toLowerCase();
+                mapa.grilla[i].bloqueo = $('#cellBlock').is(':checked');
+                mapa.grilla[i].movimiento = $('#cellMovimiento').val();
+              break;
+            }
+          }
+          //Update Celda
+          Meteor.call('updateMapa', mapa, function(error, result){
+            if (error) {
+              alert(error.message);
+            }          
+          });
           break;
-        }
+        case 'play':
+          break;
+        default:
+          break;
       }
 
-      //Update Celda
-      Meteor.call('updateMapa', mapa, function(error, result){
-        if (error) {
-          alert(error.message);
-        }          
-      });
+
     }
   });
 
