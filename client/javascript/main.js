@@ -13,8 +13,6 @@ Deps.autorun(function(){
   Meteor.subscribe('mapas', Meteor.user(), Session.get('map'));
 });
 
-/*
 Deps.autorun(function(){
-  Meteor.subscribe('celdas', Session.get('map'), Meteor.user());
+  Meteor.subscribe('criaturas', Meteor.user(), Session.get('map'));
 });
-*/

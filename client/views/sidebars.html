@@ -1,6 +1,6 @@
 <template name="mapTools">
-  <div class="panel panel-default">
-    <div class="panel-heading">Edit Map</div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Editar Mapa</div>
     <div class="panel-body">
       <form class="form-inline">
         <div class="form-group">
@@ -23,10 +23,76 @@
 </template>
 
 <template name="charTools">
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">Opciones de Juego</div>
     <div class="panel-body">
-      #MOVER<br>#ORIENTACION
+      <div class="alert alert-{{alertType}}" role="alert">{{alertText}}</div>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="btn-group" role="group" aria-label="Default button group">
+          <button type="button" class="btn btn-default"><i class="fa fa-circle-o"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-chevron-up"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-circle-o"></i></button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Default button group">
+          <button type="button" class="btn btn-default"><i class="fa fa-chevron-left"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-circle-o"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-chevron-right"></i></button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Default button group">
+          <button type="button" class="btn btn-default"><i class="fa fa-circle-o"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-chevron-down"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-circle-o"></i></button>
+        </div>
+      </li>
+      <li class="list-group-item">NUEVO PERSONAJE<br>{{> newCharForm}}</li>
+      <li class="list-group-item">
+        {{#each criaturas}}
+          <div class="{{estilo}} criaturaSB" data-id="{{_id}}">
+            <div class="flat"></div>
+          </div>    
+        {{/each}}
+      </li>
+    </ul>    
+    <div class="panel-footer">
     </div>
   </div>
+</template>
+
+<template name="newCharForm">
+  <form class="newCharForm">
+    <div class="form-group">
+      <label for="nameInput">Nombre</label>
+      <input type="text" class="form-control" id="nameInput" placeholder="Nombre">
+    </div>
+    <div class="form-group">
+      <label for="classInput">Clase</label>
+      <select class="form-control" id="classInput" placeholder="Clase">
+        <option value="guerrero">Guerrero</option>
+        <option value="mago">Mago</option>
+        <option value="clerigo">Clerigo</option>
+        <option value="ranger">Ranger</option>
+        <option value="monje">Monje</option>
+        <option value="criatura">Criatura</option>
+      </select>      
+    </div>
+    <div class="form-group">
+      <label for="styleInput">Style</label>
+      <select class="form-control" id="styleInput" placeholder="Style">
+        <option value="char">Test</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="tamanioInput">Tamaño</label>
+      <select class="form-control" id="tamanioInput" placeholder="Tamaño">
+        <option value="normal">Normal</option>
+        <option value="large">Large</option>
+        <option value="huge">Huge</option>
+        <option value="gargantuan">Gargantuan</option>
+        <option value="colossal">Colossal</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success btn-crear-char">Crear</button>
+  </form>
 </template>

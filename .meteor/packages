@@ -9,6 +9,6 @@ accounts-ui
 accounts-google
 iron:router
 natestrauser:font-awesome
-bootstrap
 mrt:bootstrap-3
 alanning:roles
+fortawesome:fontawesome

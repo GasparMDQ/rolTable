@@ -124,6 +124,12 @@
           {{/if}}
         </div>
       {{/each}}
+      {{#each criaturas}}
+        <div class="{{estilo}} {{clase}} criatura size-{{tamanio}}" style="{{position}}" data-id="{{_id}}" data-name="{{nombre}}">
+          <div class="flat"></div>
+          <div class="stand-up"></div>
+        </div>
+      {{/each}}
     </div>
   </div>
 </template>

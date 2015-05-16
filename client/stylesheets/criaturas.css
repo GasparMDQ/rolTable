@@ -47,7 +47,7 @@ npc marron
 #canvas div.criatura.orientation-sw { transform: rotateZ(225deg); }
 #canvas div.criatura.orientation-nw { transform: rotateZ(315deg); }
 
-#canvas div.criatura > .flat {
+#canvas div.criatura > .flat, div.criaturaSB > .flat {
   background-color: transparent!important;
   border-radius: 25px;
 }
@@ -64,8 +64,29 @@ div.criatura > .stand-up {
   border-top-right-radius:12px;
 }
 
-:not(.tresD) > div.criatura.char > .flat { background-image: url("img/char-flat.png"); }
+:not(.tresD) > div.criatura.char > .flat, div.criaturaSB.char > .flat { background-image: url("img/char-flat.png"); }
 div.criatura.char > .stand-up { background-image: url("img/char-stand-up.png"); }
+
+
+/* Clase para el listado de PJs */
+/* @TODO No se ve el pj en el footer. Problema con la altura? Ver posibilidad de cambiar a una lista en el panel*/
+
+div.criaturaSB {
+  background-color: transparent;
+  transform-origin: 50% 50%;
+  border: 0px solid black;
+  height: 50px;
+  width: 50px;  
+}
+
+div.criaturaSB > .flat {
+  height: 100%;
+  width: 100%;
+}
+
+div.criaturaSB.selected > .flat {
+  border: 2px solid blueviolet;
+}
 
 /*
 Render de Criaturas

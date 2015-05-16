@@ -110,9 +110,15 @@ if (Meteor.isClient) {
     },
     desc: function (){
       if(this.info){
-        var description = this.info.descripcion.replace(/\s+/g, '-').toLowerCase();;
+        var description = this.info.descripcion.replace(/\s+/g, '-').toLowerCase();
         return description;
       }
+    },
+    criaturas: function (){
+      if(Session.get('action') == 'play') {
+        return Criaturas.find({'map': Session.get('map'), 'positionSet':true});
+      }
+      return null;
     },
   });
 
@@ -150,14 +156,31 @@ if (Meteor.isClient) {
           });
           break;
         case 'play':
+          var charId = Session.get('char-selected');
+          if (charId) {
+            Meteor.call('setCharPosition', charId, parseInt(cellRow), parseInt(cellCol), function(error, result){
+              if (error) {
+                alert(error.message);
+              } else {
+                Session.set('alert-type', 'warning');
+                Session.set('alert-text', 'seleccione un PJ');
+              }      
+            });
+          }
           break;
         default:
         //do nothing (por ahora)
           break;
       }
-
-
-    }
+    },
+    'click .criatura': function (e) {
+      var id = $(e.currentTarget).attr('data-id');
+      $('.criaturaSB.selected').toggleClass('selected');
+      $(e.currentTarget).toggleClass('selected');
+      Session.set('char-selected', id);
+      Session.set('alert-type', 'success');
+      Session.set('alert-text', 'Seleccione una accion');
+    }    
   });
 
   Meteor.methods({
@@ -166,6 +189,11 @@ if (Meteor.isClient) {
     },
     updateMapa: function(data){
       Mapas.update(data._id, data);
+    },
+    setCharPosition: function(charId, row, col){
+      Criaturas.update({'_id':charId},{'$set': {'index':{'r':row, 'c':col}, 'positionSet': true}});
+      Session.set('alert-type', 'warning');
+      Session.set('alert-text', 'seleccione un PJ');
     },
 
   });

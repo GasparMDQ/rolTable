@@ -72,4 +72,28 @@
       }
     },
 
+    createChar: function(data){
+      var loggedInUser = Meteor.user();
+      if(data.nombre == ''){ throw new Meteor.Error(500, "Debe ingresar un nombre");}
+      if(data.clase == ''){ throw new Meteor.Error(500, "Debe ingresar una clase");}
+      if(data.estilo == ''){ throw new Meteor.Error(500, "Debe ingresar un estilo");}
+      if(data.tamanio == ''){ throw new Meteor.Error(500, "Debe ingresar un tamanio");}
+
+      if (Roles.userIsInRole(loggedInUser, ['master','jugador'])) {
+        data.owner = loggedInUser._id;
+        data.index = {r:0, c:0};
+        data.positionSet = false;
+
+        var newId = Criaturas.insert(data);
+        return {id: newId};
+      } else {
+        throw new Meteor.Error(403, "Not authorized to create characters");      
+      }
+      
+    },
+
+    setCharPosition: function(charId, row, col){
+      Criaturas.update({'_id':charId},{'$set': {'index':{'r':row, 'c':col}, 'positionSet': true}});
+    },
+
   });

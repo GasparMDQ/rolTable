@@ -13,7 +13,7 @@ if (Meteor.isClient) {
   Template.navbarLogged.events({
     'click .dropdown-toggle': function (e) {
       e.preventDefault();
-      $(e.target).closest('.dropdown').toggleClass('open');
+      $(e.target).find('.dropdown-menu').toggle();
     },
 
     'click #exitLnk' : function () {

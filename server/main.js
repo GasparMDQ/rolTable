@@ -45,9 +45,9 @@ Meteor.publish('mapas', function(userId, mapId){
   return;
 });
 
-Meteor.publish('celdas', function(mapId, userId){
-  if (Roles.userIsInRole(userId, ['jugador', 'master'])){
-    return Celdas.find({'mapaId': mapId});
+Meteor.publish('criaturas', function(userId, mapId){
+  if (Roles.userIsInRole(userId, ['jugador'])){
+    return Criaturas.find({'map': mapId});
   }
   this.stop();
   return;
